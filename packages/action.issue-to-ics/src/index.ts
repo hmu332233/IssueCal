@@ -5,43 +5,56 @@ import { createEvents, EventAttributes } from 'ics';
 import { createIcsFile, createJsonFile, readJsonFile } from './utils/file';
 import { commitAndPush } from './utils/git';
 import { getTimeArray } from './utils/date';
+import { stringToObject } from './utils/string';
+import { Issue } from './types';
 
-type IdMap<T> = {
-  [id: string]: T;
-};
+const CALENDAR_NAME = process.env.CALENDAR_NAME;
 
-type Issue = {
-  id: string;
-  number: number;
-  title: string;
-  body: string;
-};
-
-function convertToIssue(payload: WebhookPayload): Issue | undefined {
+/**
+ * Converts a WebhookPayload issue object into an Issue object.
+ * @param payload The WebhookPayload object to convert.
+ * @returns An Issue object or undefined if the WebhookPayload object does not contain an issue property.
+ */
+export function convertToIssue(payload: WebhookPayload): Issue | undefined {
   const { issue } = payload;
 
   if (!issue) {
     return undefined;
   }
 
+  const { date, timezone, description } = stringToObject(issue.body || '');
+
+  if (!date) {
+    throw new Error(
+      "The required 'date' field is missing from the issue body.",
+    );
+  }
+
   return {
     id: `${issue.id}`,
     number: issue.number,
     title: issue.title,
-    body: issue.body || '',
+    description,
+    date,
+    timezone,
   };
 }
 
-function convertToIcs(issues: Issue[]): string {
+/**
+ * Converts an array of Issue objects into an iCalendar string.
+ * @param issues An array of Issue objects to convert.
+ * @returns A string in the iCalendar format
+ */
+export function convertToIcs(issues: Issue[]): string {
   const events = issues.map((issue) => {
     const event: EventAttributes = {
-      productId: 'minung--ics',
-      calName: 'minung--ics 캘린더',
-      start: getTimeArray('2023-03-24', 'Asia/Seoul'),
+      // productId: 'minung--ics',
+      calName: CALENDAR_NAME,
+      start: getTimeArray(issue.date, issue.timezone),
       startInputType: 'utc',
       duration: { hours: 24 },
       title: issue.title,
-      description: issue.body,
+      description: issue.description,
       classification: 'PUBLIC',
       status: 'CONFIRMED',
       // busyStatus: 'BUSY',
@@ -52,8 +65,7 @@ function convertToIcs(issues: Issue[]): string {
   const { error, value } = createEvents(events);
 
   if (error) {
-    // TODO: throw로 에러 처리
-    return '';
+    throw error;
   }
 
   return value || '';
@@ -74,7 +86,7 @@ async function run(): Promise<void> {
 
     const issueDirPath = './data/issues';
 
-    const issueMap = readJsonFile(issueDirPath) as IdMap<Issue>;
+    const issueMap = readJsonFile(issueDirPath) as Record<string, Issue>;
     issueMap[issue.id] = issue;
 
     const icsString = convertToIcs(Object.values(issueMap));
