@@ -1,6 +1,6 @@
 ---
 name: Event
-about: Events to be registered in the calendar
+about: Add event to be registered in the calendar
 title: Event Title
 labels: ''
 assignees: ''
