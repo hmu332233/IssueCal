@@ -5,5 +5,5 @@ export function commitAndPush(path: string, message: string) {
   exec(`git config user.name "Bot"`);
   exec(`git add ${path}`);
   exec(`git commit -m "${message}"`);
-  exec(`git push`);
+  exec(`git push --force origin main local:remote docs`);
 }
