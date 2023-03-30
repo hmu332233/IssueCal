@@ -72,7 +72,7 @@ function getErrorMessage(error: unknown) {
   return String(error);
 }
 
-async function run(): Promise<void> {
+export async function run(): Promise<void> {
   try {
     const { issue, action } = github.context.payload;
 
