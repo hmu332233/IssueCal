@@ -85,7 +85,14 @@ async function run(): Promise<void> {
     const issueDirPath = './data/events';
 
     const eventMap = readJsonFile(issueDirPath) as Record<string, Event>;
-    eventMap[event.id] = event;
+    switch (action) {
+      case 'opened':
+      case 'edited':
+        eventMap[event.id] = event;
+      case 'deleted':
+      case 'closed':
+        delete eventMap[event.id];
+    }
 
     const icsString = convertToIcs(Object.values(eventMap));
 
