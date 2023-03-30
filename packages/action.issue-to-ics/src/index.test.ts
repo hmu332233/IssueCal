@@ -1,19 +1,16 @@
-import { WebhookPayload } from '@actions/github/lib/interfaces';
-import { Issue } from './types';
-import { convertToIssue, convertToIcs } from './index';
+import { Event } from './types';
+import { convertToEvent, convertToIcs } from './index';
 
 describe('convertToIssue', () => {
   test('should convert webhook payload to issue', () => {
-    const payload: WebhookPayload = {
-      issue: {
-        id: 123,
-        number: 1,
-        title: 'Test Issue',
-        body: 'description: Test description\ndate: 2023-03-28\ntimezone: UTC',
-      },
+    const issue = {
+      id: 123,
+      number: 1,
+      title: 'Test Issue',
+      body: 'description: Test description\ndate: 2023-03-28\ntimezone: UTC',
     };
 
-    const expectedIssue: Issue = {
+    const expectedEvent: Event = {
       id: '123',
       number: 1,
       title: 'Test Issue',
@@ -22,25 +19,18 @@ describe('convertToIssue', () => {
       timezone: 'UTC',
     };
 
-    expect(convertToIssue(payload)).toEqual(expectedIssue);
-  });
-
-  test('should return undefined if payload does not have issue property', () => {
-    const payload: WebhookPayload = {};
-    expect(convertToIssue(payload)).toBeUndefined();
+    expect(convertToEvent(issue)).toEqual(expectedEvent);
   });
 
   test('should throw error if date field is missing in issue body', () => {
-    const payload: WebhookPayload = {
-      issue: {
-        id: 123,
-        number: 1,
-        title: 'Test Issue',
-        body: 'description: Test description\ntimezone: UTC',
-      },
+    const issue = {
+      id: 123,
+      number: 1,
+      title: 'Test Issue',
+      body: 'description: Test description\ntimezone: UTC',
     };
 
-    expect(() => convertToIssue(payload)).toThrow(
+    expect(() => convertToEvent(issue)).toThrow(
       "The required 'date' field is missing from the issue body.",
     );
   });
@@ -48,7 +38,7 @@ describe('convertToIssue', () => {
 
 describe('convertToIcs', () => {
   test('should convert array of issues to iCalendar string', () => {
-    const issues: Issue[] = [
+    const events: Event[] = [
       {
         id: '1',
         number: 1,
@@ -67,7 +57,7 @@ describe('convertToIcs', () => {
       },
     ];
 
-    const icsString = convertToIcs(issues);
+    const icsString = convertToIcs(events);
     const icsLines = icsString.split('\r\n');
     expect(icsLines).toContain('BEGIN:VCALENDAR');
     expect(icsLines).toContain('BEGIN:VEVENT');

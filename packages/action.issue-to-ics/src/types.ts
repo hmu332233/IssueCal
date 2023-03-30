@@ -1,4 +1,4 @@
-export type Issue = {
+export type Event = {
   id: string;
   number: number;
   date: string;

@@ -6,7 +6,7 @@ import { createIcsFile, createJsonFile, readJsonFile } from './utils/file';
 import { commitAndPush } from './utils/git';
 import { getTimeArray } from './utils/date';
 import { stringToObject } from './utils/string';
-import { Issue } from './types';
+import { Event } from './types';
 
 const CALENDAR_NAME = process.env.CALENDAR_NAME;
 
@@ -15,13 +15,9 @@ const CALENDAR_NAME = process.env.CALENDAR_NAME;
  * @param payload The WebhookPayload object to convert.
  * @returns An Issue object or undefined if the WebhookPayload object does not contain an issue property.
  */
-export function convertToIssue(payload: WebhookPayload): Issue | undefined {
-  const { issue } = payload;
-
-  if (!issue) {
-    return undefined;
-  }
-
+export function convertToEvent(
+  issue: Exclude<WebhookPayload['issue'], undefined>,
+): Event {
   const { date, timezone, description } = stringToObject(issue.body || '');
 
   if (!date) {
@@ -45,7 +41,7 @@ export function convertToIssue(payload: WebhookPayload): Issue | undefined {
  * @param issues An array of Issue objects to convert.
  * @returns A string in the iCalendar format
  */
-export function convertToIcs(issues: Issue[]): string {
+export function convertToIcs(issues: Event[]): string {
   const events = issues.map((issue) => {
     const event: EventAttributes = {
       // productId: 'minung--ics',
@@ -78,22 +74,24 @@ function getErrorMessage(error: unknown) {
 
 async function run(): Promise<void> {
   try {
-    const issue = convertToIssue(github.context.payload);
+    const { issue, action } = github.context.payload;
 
     if (!issue) {
       return;
     }
 
-    const issueDirPath = './data/issues';
+    const event = convertToEvent(issue);
 
-    const issueMap = readJsonFile(issueDirPath) as Record<string, Issue>;
-    issueMap[issue.id] = issue;
+    const issueDirPath = './data/events';
 
-    const icsString = convertToIcs(Object.values(issueMap));
+    const eventMap = readJsonFile(issueDirPath) as Record<string, Event>;
+    eventMap[event.id] = event;
+
+    const icsString = convertToIcs(Object.values(eventMap));
 
     createIcsFile(issueDirPath, icsString);
-    createJsonFile(issueDirPath, issueMap);
-    commitAndPush(issueDirPath, 'Update issues');
+    createJsonFile(issueDirPath, eventMap);
+    commitAndPush(issueDirPath, 'Update events');
   } catch (error) {
     core.setFailed(getErrorMessage(error));
   }
