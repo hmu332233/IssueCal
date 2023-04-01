@@ -84,6 +84,7 @@ export async function run(): Promise<void> {
 
     const issueDirPath = './data/events';
 
+    // FIXME: 브랜치가 달라서 여기는 항상 {}만 리턴하는 버그가 있음
     const eventMap = readJsonFile(issueDirPath) as Record<string, Event>;
     switch (action) {
       case 'opened':
