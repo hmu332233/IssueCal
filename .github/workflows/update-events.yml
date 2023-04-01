@@ -9,7 +9,7 @@ on:
     types: [opened, edited, deleted, closed]
 
 jobs:
-  build:
+  update-events:
     runs-on: ubuntu-latest
 
     strategy:
