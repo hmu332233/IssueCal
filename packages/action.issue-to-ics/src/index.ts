@@ -89,9 +89,13 @@ export async function run(): Promise<void> {
       case 'opened':
       case 'edited':
         eventMap[event.id] = event;
+        break;
       case 'deleted':
       case 'closed':
         delete eventMap[event.id];
+        break;
+      default:
+        break;
     }
 
     const icsString = convertToIcs(Object.values(eventMap));
