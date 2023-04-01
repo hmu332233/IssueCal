@@ -25,5 +25,8 @@ export function createIcsFile(path: string, data: any) {
 }
 
 export function readJsonFile(path: string) {
+  if (!fs.existsSync(path)) {
+    return {};
+  }
   return JSON.parse(fs.readFileSync(`${path}/index.json`, 'utf8'));
 }
