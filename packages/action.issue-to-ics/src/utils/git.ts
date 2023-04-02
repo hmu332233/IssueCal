@@ -1,4 +1,5 @@
 import { exec } from 'shelljs';
+import ghpages from 'gh-pages';
 import path from 'path';
 
 export function commitAndPush(path: string, message: string) {
@@ -7,6 +8,17 @@ export function commitAndPush(path: string, message: string) {
   exec(`git add ${path}`);
   exec(`git commit -m "${message}"`);
   exec(`git push --force origin main:docs`);
+}
+
+export function publishApi(filePath: string): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
+    ghpages.publish(filePath, (err) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve();
+    });
+  });
 }
 
 export function getFileContentFromDocs(filePath: string) {

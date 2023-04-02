@@ -3,7 +3,7 @@ import * as core from '@actions/core';
 import * as github from '@actions/github';
 import { createEvents, EventAttributes } from 'ics';
 import { createIcsFile, createJsonFile } from './utils/file';
-import { commitAndPush, getFileContentFromDocs } from './utils/git';
+import { publishApi, getFileContentFromDocs } from './utils/git';
 import { getTimeArray } from './utils/date';
 import { stringToObject } from './utils/string';
 import { Event } from './types';
@@ -106,7 +106,7 @@ export async function run(): Promise<void> {
 
     createIcsFile(issueDirPath, icsString);
     createJsonFile(issueDirPath, eventMap);
-    ghpages.publish(issueDirPath, () => {});
+    await publishApi(issueDirPath);
     // commitAndPush(issueDirPath, 'Update events');
   } catch (error) {
     core.setFailed(getErrorMessage(error));
