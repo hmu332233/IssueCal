@@ -7,6 +7,7 @@ import { commitAndPush, getFileContentFromDocs } from './utils/git';
 import { getTimeArray } from './utils/date';
 import { stringToObject } from './utils/string';
 import { Event } from './types';
+import ghpages from 'gh-pages';
 
 const CALENDAR_NAME = process.env.CALENDAR_NAME;
 
@@ -105,7 +106,8 @@ export async function run(): Promise<void> {
 
     createIcsFile(issueDirPath, icsString);
     createJsonFile(issueDirPath, eventMap);
-    commitAndPush(issueDirPath, 'Update events');
+    ghpages.publish(issueDirPath, () => {});
+    // commitAndPush(issueDirPath, 'Update events');
   } catch (error) {
     core.setFailed(getErrorMessage(error));
   }
