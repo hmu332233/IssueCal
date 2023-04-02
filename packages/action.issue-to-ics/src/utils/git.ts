@@ -12,12 +12,21 @@ export function commitAndPush(path: string, message: string) {
 
 export function publishApi(filePath: string): Promise<void> {
   return new Promise<void>((resolve, reject) => {
-    ghpages.publish(filePath, (err) => {
-      if (err) {
-        return reject(err);
-      }
-      return resolve();
-    });
+    ghpages.publish(
+      filePath,
+      {
+        user: {
+          name: 'Bot',
+          email: 'bot@minung.dev',
+        },
+      },
+      (err) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve();
+      },
+    );
   });
 }
 
