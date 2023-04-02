@@ -2,8 +2,8 @@ import { WebhookPayload } from '@actions/github/lib/interfaces';
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 import { createEvents, EventAttributes } from 'ics';
-import { createIcsFile, createJsonFile, readJsonFile } from './utils/file';
-import { commitAndPush } from './utils/git';
+import { createIcsFile, createJsonFile } from './utils/file';
+import { commitAndPush, getFileContentFromDocs } from './utils/git';
 import { getTimeArray } from './utils/date';
 import { stringToObject } from './utils/string';
 import { Event } from './types';
@@ -84,8 +84,10 @@ export async function run(): Promise<void> {
 
     const issueDirPath = './data/events';
 
-    // FIXME: 브랜치가 달라서 여기는 항상 {}만 리턴하는 버그가 있음
-    const eventMap = readJsonFile(issueDirPath) as Record<string, Event>;
+    const eventMap = JSON.parse(getFileContentFromDocs(issueDirPath)) as Record<
+      string,
+      Event
+    >;
     switch (action) {
       case 'opened':
       case 'edited':

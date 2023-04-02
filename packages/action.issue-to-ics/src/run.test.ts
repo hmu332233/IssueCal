@@ -1,6 +1,6 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
-import { readJsonFile } from './utils/file';
+import { getFileContentFromDocs } from './utils/git';
 import { run } from './index';
 
 jest.mock('@actions/core');
@@ -18,7 +18,7 @@ const mockIssue = {
 describe('run', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    (readJsonFile as jest.Mock).mockReturnValue({});
+    (getFileContentFromDocs as jest.Mock).mockReturnValue('{}');
   });
 
   afterEach(() => {
