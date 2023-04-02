@@ -13,11 +13,14 @@ export function getFileContentFromDocs(filePath: string) {
   exec(`git fetch`);
 
   const result = exec(
-    `git show origin/docs:${path.resolve(
+    `git show origin/docs:${path.join(
       'packages/action.issue-to-ics',
       filePath,
+      'index.json',
     )}`,
-    { silent: true },
+    {
+      silent: true,
+    },
   );
 
   if (result.code !== 0) {
