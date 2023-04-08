@@ -31,17 +31,18 @@ To activate GitHub Pages and get your calendar URL, follow these steps:
 
 1. Go to your GitHub repository's main page.
 2. Click on the "Settings" tab, located in the top-right corner, just below the repository name.
-3. Scroll down to the "GitHub Pages" section.
-4. In the "Source" dropdown, choose the branch you want to deploy your GitHub Pages site from (e.g., main or gh-pages). If you have a /docs folder, you can also choose to serve the site from there.
-5. Click "Save" to apply your changes.
-6. GitHub will now build and deploy your site. Once the build is complete, you'll see a success message with a link to your published site. The URL format will be https://<username>.github.io/<repository>/.
+3. In the Code and automation section of the sidebar, click Pages.
+4. Under Build and deployment, under Source, select Deploy from a branch.
+5. Under Build and deployment, under Branch, select gh-pages, root.
+6. Click "Save" to apply your changes.
+6. GitHub will now build and deploy your calendar url. Once the build is complete, you'll see a success message with a link to your published calendar url. The URL format will be https://<username>.github.io/IssueCal.
 
 Make sure to include a link to your published GitHub Pages site in the README, so users can easily access and subscribe to the IssueCal calendar.
 
 ```
 Example:
 
-Check out our live IssueCal calendar [here](https://<username>.github.io/<repository>/).
+Check out our live IssueCal calendar [here](https://<username>.github.io/IssueCal).
 ```
 
 ## Create Event
