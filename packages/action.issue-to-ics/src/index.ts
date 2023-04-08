@@ -3,11 +3,10 @@ import * as core from '@actions/core';
 import * as github from '@actions/github';
 import { createEvents, EventAttributes } from 'ics';
 import { createIcsFile, createJsonFile } from './utils/file';
-import { publishApi, getFileContentFromDocs } from './utils/git';
+import { publishApi, getEventsFromGhPages } from './utils/git';
 import { getTimeArray } from './utils/date';
 import { stringToObject } from './utils/string';
 import { Event } from './types';
-import ghpages from 'gh-pages';
 
 const CALENDAR_NAME = process.env.CALENDAR_NAME;
 
@@ -73,6 +72,16 @@ function getErrorMessage(error: unknown) {
   return String(error);
 }
 
+// github.context.payload = {
+//   issue: {
+//     id: '1',
+//     number: 1,
+//     title: 'Test Issue',
+//     body: 'date: 2023-04-01\ntimezone: UTC\ndescription: Test event',
+//   },
+//   action: 'opened',
+// }
+
 export async function run(): Promise<void> {
   try {
     const { issue, action } = github.context.payload;
@@ -83,9 +92,7 @@ export async function run(): Promise<void> {
 
     const event = convertToEvent(issue);
 
-    const issueDirPath = './data/events';
-
-    const eventMap = JSON.parse(getFileContentFromDocs(issueDirPath)) as Record<
+    const eventMap = JSON.parse(getEventsFromGhPages()) as Record<
       string,
       Event
     >;
@@ -104,6 +111,7 @@ export async function run(): Promise<void> {
 
     const icsString = convertToIcs(Object.values(eventMap));
 
+    const issueDirPath = './data/events';
     createIcsFile(issueDirPath, icsString);
     createJsonFile(issueDirPath, eventMap);
     await publishApi(issueDirPath);
