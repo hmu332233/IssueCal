@@ -52,4 +52,4 @@ jobs:
       - run: pnpm --filter action.issue-to-ics build
       - run: pnpm --filter action.issue-to-ics start
         env:
-          GH_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
