@@ -16,14 +16,13 @@ Using IssueCal is simple. Follow the steps below:
 4. **Subscribing to the Calendar URL**: Once you have your IssueCal calendar URL, you can easily subscribe to it using popular calendar applications such as Google Calendar and Apple Calendar. Check the ["Subscribing to the Calendar URL"](#setting-up-github-pages-calendar-url) section for detailed instructions on how to do this.
 
 ## Create a repository from the template
-You can click on the following link to generate a repository using the template: Create a new repository from hmu332233/IssueCal
-. Alternatively, you can visit the IssueCal repository on GitHub and click on the "Use this template" button on the top-right.
+You can click on the following link to generate a repository using the template: [**Create a new repository**](https://github.com/hmu332233/IssueCal/generate) from `hmu332233/IssueCal`.  
+Alternatively, you can visit the [IssueCal repository on GitHub](https://github.com/hmu332233/IssueCal) and click on the "Use this template" button on the top-right.
 
 In both cases, the next steps are:
 
 1. Enter a name for your new repository.
-2. Important: Check "Include all branches".
-3. Click on "Create repository from template".
+2. Click on "Create repository from template".
 
 
 ## Setting Up GitHub Pages (Calendar URL)
@@ -35,14 +34,14 @@ To activate GitHub Pages and get your calendar URL, follow these steps:
 4. Under Build and deployment, under Source, select Deploy from a branch.
 5. Under Build and deployment, under Branch, select gh-pages, root.
 6. Click "Save" to apply your changes.
-6. GitHub will now build and deploy your calendar url. Once the build is complete, you'll see a success message with a link to your published calendar url. The URL format will be https://<username>.github.io/IssueCal.
+7. GitHub will now build and deploy your calendar url. Once the build is complete, you'll see a success message with a link to your published calendar url. The URL format will be `https://<username>.github.io/<repository-name>`.
 
 Make sure to include a link to your published GitHub Pages site in the README, so users can easily access and subscribe to the IssueCal calendar.
 
 ```
 Example:
 
-Check out our live IssueCal calendar [here](https://<username>.github.io/IssueCal).
+Check out our live IssueCal calendar [here](https://<username>.github.io/<repository-name>).
 ```
 
 ## Create Event
