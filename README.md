@@ -46,7 +46,7 @@ Make sure to include a link to your published GitHub Pages site in the README, s
 ```
 Example:
 
-Check out our live IssueCal calendar [here](https://<username>.github.io/<repository-name>).
+Check out our live IssueCal calendar [here](https://<username>.github.io/<repository-name>/events.ics).
 ```
 
 ### Create Event
@@ -68,14 +68,14 @@ Once you have your IssueCal calendar URL, you can easily subscribe to it using p
 2. On the left side, locate the "Other calendars" section.
 3. Click the "+" button next to "Other calendars."
 4. Select "From URL" in the dropdown menu.
-5. Paste your IssueCal calendar URL into the "URL of calendar" field.
+5. Paste your IssueCal calendar URL in the format **`https://<username>.github.io/<repository-name>/events.ics`** into the "URL of calendar" field.
 6. Click "Add calendar."
 The IssueCal calendar will now appear in your list of subscribed calendars, and events will automatically update when new events are added.
 
 #### Apple Calendar
 1. Open the Calendar app on your Mac.
 2. In the menu bar, click "File" > "New Calendar Subscription."
-3. Paste your IssueCal calendar URL into the "Calendar URL" field.
+3. Paste your IssueCal calendar URL in the format **`https://<username>.github.io/<repository-name>/events.ics`** into the "Calendar URL" field.
 4. Click "Subscribe."
 5. Configure your desired settings for the calendar, such as name, color, and refresh frequency.
 6. Click "OK."
