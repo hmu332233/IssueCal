@@ -6,7 +6,12 @@ Effortlessly convert GitHub issues into shareable subscription calendars for eve
 
 IssueCal is a service that allows you to turn GitHub issues into universally accessible subscription calendars. By converting GitHub issues into ICS format, it enables easy sharing of calendars with anyone, keeping both individuals and groups up-to-date with the latest schedules and events.
 
-## Usage
+## Features
+- **Automatic Calendar Event Registration**: Each time you create or update a GitHub issue, IssueCal registers it as an event in your calendar, making it incredibly easy to manage and track events, appointments, or special dates.
+- **Shareable Calendar UR**L: Harnessing the power of GitHub Pages, IssueCal allows you to generate shareable calendar URLs. This feature enables friends, family, or anyone else to view and stay up-to-date with your calendar events.
+- **Seamless Integration**: IssueCal is designed to work flawlessly with GitHub's issue tracking system, ensuring a smooth and hassle-free experience for both calendar creators and viewers.
+
+## Getting Started
 
 Using IssueCal is simple. Follow the steps below:
 
@@ -15,7 +20,7 @@ Using IssueCal is simple. Follow the steps below:
 3. **Create Event**: Quickly create events by adding a new issue in your GitHub repository using the "Event" issue template. For a detailed guide, refer to the ["Create Event"](#setting-up-github-pages-calendar-url) section in this README.
 4. **Subscribing to the Calendar URL**: Once you have your IssueCal calendar URL, you can easily subscribe to it using popular calendar applications such as Google Calendar and Apple Calendar. Check the ["Subscribing to the Calendar URL"](#setting-up-github-pages-calendar-url) section for detailed instructions on how to do this.
 
-## Create a repository from the template
+### Create a repository from the template
 You can click on the following link to generate a repository using the template: [**Create a new repository**](https://github.com/hmu332233/IssueCal/generate) from `hmu332233/IssueCal`.  
 Alternatively, you can visit the [IssueCal repository on GitHub](https://github.com/hmu332233/IssueCal) and click on the "Use this template" button on the top-right.
 
@@ -25,7 +30,7 @@ In both cases, the next steps are:
 2. Click on "Create repository from template".
 
 
-## Setting Up GitHub Pages (Calendar URL)
+### Setting Up GitHub Pages (Calendar URL)
 To activate GitHub Pages and get your calendar URL, follow these steps:
 
 1. Go to your GitHub repository's main page.
@@ -44,7 +49,7 @@ Example:
 Check out our live IssueCal calendar [here](https://<username>.github.io/<repository-name>).
 ```
 
-## Create Event
+### Create Event
 
 Follow the steps below to create an event using IssueCal:
 
@@ -55,10 +60,10 @@ Follow the steps below to create an event using IssueCal:
 5. Once you've created the event, IssueCal will automatically convert it into a shareable subscription calendar. This will allow everyone to easily stay informed of the latest schedules and events in your project.
 
 
-## Subscribing to the Calendar URL
+### Subscribing to the Calendar URL
 Once you have your IssueCal calendar URL, you can easily subscribe to it using popular calendar applications such as Google Calendar and Apple Calendar. Here's how to do it:
 
-### Google Calendar
+#### Google Calendar
 1. Open [Google Calendar](https://calendar.google.com/).
 2. On the left side, locate the "Other calendars" section.
 3. Click the "+" button next to "Other calendars."
@@ -67,7 +72,7 @@ Once you have your IssueCal calendar URL, you can easily subscribe to it using p
 6. Click "Add calendar."
 The IssueCal calendar will now appear in your list of subscribed calendars, and events will automatically update when new events are added.
 
-### Apple Calendar
+#### Apple Calendar
 1. Open the Calendar app on your Mac.
 2. In the menu bar, click "File" > "New Calendar Subscription."
 3. Paste your IssueCal calendar URL into the "Calendar URL" field.
