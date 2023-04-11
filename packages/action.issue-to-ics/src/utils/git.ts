@@ -27,9 +27,10 @@ export function publishApi(filePath: string): Promise<void> {
     ghpages.publish(
       filePath,
       {
-        // repo: `https://${token}@github.com/${repository.full_name}.git`,
+        // https://x-access-token:${githubToken}@${getServerUrl().host}/${publishRepo}.git
+        repo: `https://x-access-token:${token}@github.com/${repository.full_name}.git`,
         // repo: `https://github.com/${repository.full_name}.git`,
-        // silent: true,
+        silent: true,
         user: {
           name: 'github-actions[bot]',
           email: 'github-actions[bot]@users.noreply.github.com',
