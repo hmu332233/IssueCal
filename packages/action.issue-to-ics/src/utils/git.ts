@@ -26,8 +26,9 @@ export function publishApi(filePath: string): Promise<void> {
     ghpages.publish(
       filePath,
       {
-        repo: `https://${token}@github.com/${repository.full_name}.git`,
-        silent: true,
+        // repo: `https://${token}@github.com/${repository.full_name}.git`,
+        repo: `https://github.com/${repository.full_name}.git`,
+        // silent: true,
         user: {
           name: 'Bot',
           email: 'bot@minung.dev',
