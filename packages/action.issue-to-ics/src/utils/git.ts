@@ -51,7 +51,8 @@ export function getEventsFromGhPages() {
   });
 
   if (result.code !== 0) {
-    throw new Error(result.stderr);
+    console.log(result.stderr);
+    return '{}';
   }
 
   return result.stdout;
