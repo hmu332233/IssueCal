@@ -28,7 +28,7 @@ export function publishApi(filePath: string): Promise<void> {
       filePath,
       {
         // repo: `https://${token}@github.com/${repository.full_name}.git`,
-        repo: `https://github.com/${repository.full_name}.git`,
+        // repo: `https://github.com/${repository.full_name}.git`,
         // silent: true,
         user: {
           name: 'github-actions[bot]',
