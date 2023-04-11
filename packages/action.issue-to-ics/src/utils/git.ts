@@ -7,6 +7,7 @@ if (!token) {
   throw new Error('Require github token!');
 }
 
+// TODO: 불필요한 git 관련 코드 모두 제거하기
 export function commitAndPush(path: string, message: string) {
   exec(`git config user.email "bot@minung.dev"`);
   exec(`git config user.name "Bot"`);
@@ -30,8 +31,8 @@ export function publishApi(filePath: string): Promise<void> {
         repo: `https://github.com/${repository.full_name}.git`,
         // silent: true,
         user: {
-          name: 'Bot',
-          email: 'bot@minung.dev',
+          name: 'github-actions[bot]',
+          email: 'github-actions[bot]@users.noreply.github.com',
         },
       },
       (err) => {
