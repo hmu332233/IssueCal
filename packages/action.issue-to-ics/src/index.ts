@@ -114,8 +114,13 @@ export async function run(): Promise<void> {
     const issueDirPath = './data/events';
     createIcsFile(issueDirPath, icsString);
     createJsonFile(issueDirPath, eventMap);
+
+    console.log('created ics, json file!!');
+
     await publishApi(issueDirPath);
     // commitAndPush(issueDirPath, 'Update events');
+
+    console.log('published!');
   } catch (error) {
     core.setFailed(getErrorMessage(error));
   }
