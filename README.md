@@ -1,6 +1,6 @@
 # IssueCal
 
-Effortlessly convert GitHub issues into shareable subscription calendars for everyone.
+Create a simple, shareable calendar through Github issues!
 
 ## What's IssueCal
 
