@@ -1,6 +1,6 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
-import { getFileContentFromDocs } from './utils/git';
+import { getEventsFromGhPages } from './utils/git';
 import { run } from './index';
 
 jest.mock('@actions/core');
@@ -18,7 +18,7 @@ const mockIssue = {
 describe('run', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    (getFileContentFromDocs as jest.Mock).mockReturnValue('{}');
+    (getEventsFromGhPages as jest.Mock).mockReturnValue('{}');
   });
 
   afterEach(() => {
